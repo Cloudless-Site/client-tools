@@ -7,5 +7,3 @@ recvfrom
 recvfrom.exe
 *.o
 *.zip
-# Ma mantieni la cartella bin/ se vuoi committare i file compilati
-!bin/
