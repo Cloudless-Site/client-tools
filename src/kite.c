@@ -1,4 +1,4 @@
-// Copyright 2026 Marco Guarducci
+// Copyright 2026 Cloudless Site
 // SPDX-License-Identifier: Apache-2.0
 
 /*

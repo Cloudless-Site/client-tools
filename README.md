@@ -108,7 +108,7 @@ See the [LICENSE](LICENSE) file for the full text.
 This repository contains **no third-party code**. All source files are original works and depend only on standard operating system APIs.
 
 ### Copyright
-Copyright 2026 Marco Guarducci.
+Copyright 2026 Cloudless Site
 
 ---
 
