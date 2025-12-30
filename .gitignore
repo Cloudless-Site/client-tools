@@ -1,0 +1,11 @@
+# Ignora i binari nella root se compili in locale
+kite
+kite.exe
+sendto
+sendto.exe
+recvfrom
+recvfrom.exe
+*.o
+*.zip
+# Ma mantieni la cartella bin/ se vuoi committare i file compilati
+!bin/
