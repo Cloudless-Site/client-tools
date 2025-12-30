@@ -1,7 +1,6 @@
-```markdown
 # ☁️ Cloudless Client Tools
 
-This repository contains the **open-source client tools** for the [Cloudless](https://github.com/tuo-user/cloudless) reverse proxy service.
+This repository contains the **open-source client tools** for the [Cloudless](https://github.com/Cloudless-Site/cloudless-docs) reverse proxy service.
 
 These tools are designed to be lightweight, portable, and dependency-free, allowing you to connect to Cloudless tunnels and diagnose UDP connectivity from any environment (Linux, Windows, ARM/Raspberry Pi).
 
@@ -113,5 +112,4 @@ Copyright 2026 Marco Guarducci.
 
 ---
 
-*For documentation on server-side setup, refer to the [Cloudless Service Documentation](https://github.com/tuo-user/cloudless).*
-```
+*For documentation on server-side setup, refer to the [Cloudless Service Documentation](https://github.com/Cloudless-Site/cloudless-docs).*
