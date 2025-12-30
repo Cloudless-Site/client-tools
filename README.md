@@ -112,4 +112,4 @@ Copyright 2026 Cloudless Site
 
 ---
 
-*For documentation on server-side setup, refer to the [Cloudless Service Documentation](https://github.com/Cloudless-Site/cloudless-docs).*
+*For documentation on server-side setup, refer to the [Cloudless Service Documentation](https://github.com/Cloudless-Site/docs).*
