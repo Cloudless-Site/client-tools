@@ -37,7 +37,7 @@ Used for maximum performance. Kite connects directly to the Cloudless core via T
 **Command:**
 ```bash
 # Connect using the string provided by the server
-./kite -r cloudless.site:10000:TOKEN -l 192.168.1.50:5555
+./kite -r cloudless.site:10000:A1B2... -l 192.168.1.50:51820
 ```
 
 ---
