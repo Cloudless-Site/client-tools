@@ -11,8 +11,9 @@ CC_ARM    = arm-linux-gnueabihf-gcc
 CC_ARM64  = aarch64-linux-gnu-gcc
 
 # --- Flags ---
-# -static: Per rendere i binari portabili senza dipendenze esterne
-CFLAGS    = -O2 -Wall -Wextra
+# Static build for portability (No PIE usually for full static)
+SEC_FLAGS_TOOLS = -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -Wl,-z,relro -Wl,-z,now
+CFLAGS    = -O2 -Wall -Wextra $(SEC_FLAGS_TOOLS)
 LDFLAGS   = -static -pthread
 LD_WIN    = -static -pthread -lws2_32
 

@@ -21,6 +21,7 @@
 #include <pthread.h>
 #include <limits.h>
 #include <time.h>
+#include <ctype.h>
 
 /* --- CRYPTO START (Embedded Zero-Dep HMAC-SHA256) --- */
 
@@ -413,10 +414,14 @@ static void parse_target(const char *arg) {
 
 static void parse_remote_str(const char *arg) {
     char *copy = strdup(arg);
-    char *last = strrchr(copy, ':'); 
-    if(last) {
+    char *first = strchr(copy, ':');
+    char *last  = strrchr(copy, ':');
+    if (!first) { free(copy); return; }
+    if (first == last) {
+        g_connect = strdup(copy); // host:port, token passed separately
+    } else {
         *last = '\0';
-        g_token = strdup(last+1);
+        if (!g_token) g_token = strdup(last+1);
         g_connect = strdup(copy);
     }
     free(copy);
@@ -458,12 +463,22 @@ int main(int argc, char **argv) {
         else if(!strcmp(opt,"-r") || !strcmp(opt,"--connect")) parse_remote_str(val);
         else if(!strcmp(opt,"-l") || !strcmp(opt,"--local") || !strcmp(opt,"-p")) parse_target(val);
         else if(!strcmp(opt,"--token")) g_token = strdup(val);
+	else if(!strcmp(opt,"-T") || !strcmp(opt,"--token-file")) {
+            FILE *f = fopen(val, "rb");
+            if (!f) { fprintf(stderr, "token-file open failed: %s\n", val); exit(2); }
+            char tbuf[128]; size_t n = fread(tbuf, 1, sizeof(tbuf)-1, f); fclose(f);
+            tbuf[n] = 0;
+            char *s=tbuf; while(*s && isspace((unsigned char)*s)) s++;
+            char *e=s+strlen(s); while(e>s && isspace((unsigned char)e[-1])) *--e=0;
+            if(*s==0){ fprintf(stderr, "token-file empty\n"); exit(2); }
+            g_token = strdup(s);
+        }
     }
 
     if (!g_target_udp_port || (!g_connect && !g_listen_tcp)) {
         printf("Kite - UDP Bridge (Ultimate)\n");
-        printf("1. SSH Adapter:  kite -L <TcpListen>:<UdpHost>:<UdpPort>\n");
-        printf("2. Cloud Direct: kite -r <CloudHost>:<CloudPort>:<Token> -l <UdpHost>:<UdpPort>\n");
+	printf("2. Cloud Direct (safe): kite -r <CloudHost>:<CloudPort> -T <token_file> -l <UdpHost>:<UdpPort>\n");
+        printf("   (compat)            kite -r <CloudHost>:<CloudPort>:<Token> -l <UdpHost>:<UdpPort>\n");
         return 1;
     }
     
